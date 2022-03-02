@@ -73,7 +73,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .login {
   width: 400px;
   margin: 0 auto;
