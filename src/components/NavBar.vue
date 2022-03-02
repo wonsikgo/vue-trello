@@ -3,14 +3,30 @@
     <div class="header-logo">
       <router-link to="/">Home</router-link>
     </div>
+    {{ isAuth }}
     <div class="header-auth">
-      <router-link to="/login">Login</router-link>
+      <a href="" v-if="isAuth" @click.prevent="logout">Logout</a>
+      <router-link v-else to="/login">Login</router-link>
     </div>
   </nav>
 </template>
 
 <script>
-export default {};
+import { setAuthInHeader } from "@/api";
+export default {
+  computed: {
+    isAuth() {
+      return !!localStorage.getItem("token");
+    },
+  },
+  methods: {
+    logout() {
+      delete localStorage.token;
+      setAuthInHeader(null);
+      this.$router.push("/login");
+    },
+  },
+};
 </script>
 
 <style scoped>
