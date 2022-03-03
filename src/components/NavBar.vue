@@ -3,7 +3,6 @@
     <div class="header-logo">
       <router-link to="/">Home</router-link>
     </div>
-    {{ isAuth }}
     <div class="header-auth">
       <a href="" v-if="isAuth" @click.prevent="logout">Logout</a>
       <router-link v-else to="/login">Login</router-link>

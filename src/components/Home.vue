@@ -28,12 +28,17 @@ export default {
   data() {
     return {
       loading: false,
-      boards: "",
+      boards: [],
       error: "",
     };
   },
   created() {
     this.fetchData();
+  },
+  updated() {
+    this.$refs.boardItem.forEach((el) => {
+      el.style.backgroundColor = el.dataset.bgcolor;
+    });
   },
   methods: {
     fetchData() {
@@ -41,11 +46,15 @@ export default {
       board
         .fetch()
         .then((data) => {
-          this.boards = data;
+          console.log(data);
+          this.boards = data.list;
         })
-        .finally((_) => {
+        .finally(() => {
           this.loading = false;
         });
+    },
+    addBoard() {
+      console.log("add board");
     },
   },
 };
