@@ -18,19 +18,30 @@
           Create new board...
         </a>
       </div>
+      <AddBoard
+        v-if="isAddBoard"
+        @close="isAddBoard = false"
+        @submit="onAddBoard"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import AddBoard from "./AddBoard.vue";
 import { board } from "@/api";
+
 export default {
   data() {
     return {
       loading: false,
       boards: [],
       error: "",
+      isAddBoard: false,
     };
+  },
+  components: {
+    AddBoard,
   },
   created() {
     this.fetchData();
@@ -46,7 +57,6 @@ export default {
       board
         .fetch()
         .then((data) => {
-          console.log(data);
           this.boards = data.list;
         })
         .finally(() => {
@@ -54,7 +64,14 @@ export default {
         });
     },
     addBoard() {
+      this.isAddBoard = true;
       console.log("add board");
+    },
+    onAddBoard(title) {
+      console.log(title);
+      board.create(title).then(() => {
+        this.fetchData();
+      });
     },
   },
 };

@@ -57,6 +57,7 @@ export default {
   },
   methods: {
     onSubmit() {
+      console.log("11");
       auth
         .login(this.email, this.password)
         .then((data) => {
