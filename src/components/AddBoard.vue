@@ -29,6 +29,7 @@
 
 <script>
 import Modal from "./Modal.vue";
+import { mapMutations, mapActions } from "vuex";
 export default {
   components: {
     Modal,
@@ -48,12 +49,15 @@ export default {
     this.$refs.input.focus();
   },
   methods: {
+    ...mapMutations(["SET_IS_ADD_BOARD"]),
+    ...mapActions(["ADD_BOARD"]),
     close() {
-      this.$emit("close");
+      this.SET_IS_ADD_BOARD(false);
     },
     addBoard() {
-      this.$emit("close");
-      this.$emit("submit", this.input);
+      this.SET_IS_ADD_BOARD(false);
+      this.ADD_BOARD({ title: this.input });
+      this.$emit("submit");
     },
   },
 };
