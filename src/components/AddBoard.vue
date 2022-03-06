@@ -50,14 +50,14 @@ export default {
   },
   methods: {
     ...mapMutations(["SET_IS_ADD_BOARD"]),
-    ...mapActions(["ADD_BOARD"]),
+    ...mapActions(["ADD_BOARD", "FETCH_BOARD"]),
     close() {
       this.SET_IS_ADD_BOARD(false);
     },
     addBoard() {
       this.SET_IS_ADD_BOARD(false);
       this.ADD_BOARD({ title: this.input });
-      this.$emit("submit");
+      this.FETCH_BOARD();
     },
   },
 };

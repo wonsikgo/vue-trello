@@ -18,21 +18,19 @@
           Create new board...
         </a>
       </div>
-      <AddBoard v-if="isAddBoard" @submit="addBoard" />
+      <AddBoard v-if="isAddBoard" />
     </div>
   </div>
 </template>
 
 <script>
 import AddBoard from "./AddBoard.vue";
-import { board } from "@/api";
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
   data() {
     return {
       loading: false,
-      boards: [],
       error: "",
     };
   },
@@ -43,7 +41,7 @@ export default {
     this.fetchData();
   },
   computed: {
-    ...mapState(["isAddBoard"]),
+    ...mapState(["isAddBoard", "boards"]),
   },
   updated() {
     this.$refs.boardItem.forEach((el) => {
@@ -52,19 +50,12 @@ export default {
   },
   methods: {
     ...mapMutations(["SET_IS_ADD_BOARD"]),
+    ...mapActions(["FETCH_BOARD"]),
     fetchData() {
       this.loading = true;
-      board
-        .fetch()
-        .then((data) => {
-          this.boards = data.list;
-        })
-        .finally(() => {
-          this.loading = false;
-        });
-    },
-    addBoard() {
-      this.fetchData();
+      this.FETCH_BOARD().finally(() => {
+        this.loading = false;
+      });
     },
   },
 };
