@@ -9,7 +9,6 @@ const mutations = {
   },
   LOGIN(state, token) {
     if (!token) return;
-
     state.token = token;
     localStorage.setItem("token", token);
     setAuthInHeader(token);
@@ -18,6 +17,9 @@ const mutations = {
     state.token = null;
     delete localStorage.token;
     setAuthInHeader(null);
+  },
+  SET_BOARD(state, board) {
+    state.board = board;
   },
 };
 

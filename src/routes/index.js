@@ -11,8 +11,6 @@ Vue.use(VueRouter);
 
 const requireAuth = (to, from, next) => {
   const loginPath = `/login?Path=${encodeURIComponent(to.path)} `;
-  console.log("navigaton guard");
-  console.log(`store.getters.isAuth ${store.getters.isAuth}`);
   store.getters.isAuth ? next() : next(loginPath);
 };
 

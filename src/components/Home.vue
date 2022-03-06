@@ -50,10 +50,10 @@ export default {
   },
   methods: {
     ...mapMutations(["SET_IS_ADD_BOARD"]),
-    ...mapActions(["FETCH_BOARD"]),
+    ...mapActions(["FETCH_BOARDS"]),
     fetchData() {
       this.loading = true;
-      this.FETCH_BOARD().finally(() => {
+      this.FETCH_BOARDS().finally(() => {
         this.loading = false;
       });
     },
