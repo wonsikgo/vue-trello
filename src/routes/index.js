@@ -5,20 +5,15 @@ import Login from "../components/Login.vue";
 import Board from "../components/Board.vue";
 import Card from "../components/Card.vue";
 import NotFound from "../components/NotFound.vue";
-import { setAuthInHeader } from "../api";
+import store from "@/store";
 
 Vue.use(VueRouter);
 
 const requireAuth = (to, from, next) => {
-  const isAuth = localStorage.getItem("token");
   const loginPath = `/login?Path=${encodeURIComponent(to.path)} `;
-  console.log(`isAuth : ${isAuth}`);
-  if (isAuth) {
-    setAuthInHeader(isAuth);
-    next();
-  } else {
-    next(loginPath);
-  }
+  console.log("navigaton guard");
+  console.log(`store.getters.isAuth ${store.getters.isAuth}`);
+  store.getters.isAuth ? next() : next(loginPath);
 };
 
 const router = new VueRouter({
