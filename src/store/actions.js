@@ -34,6 +34,11 @@ const actions = {
       .update(id, { title, description, pos, listId })
       .then(() => dispatch("FETCH_BOARD", { id: state.board.id }));
   },
+  DELETE_CARD({ state, dispatch }, { id }) {
+    return api.card
+      .destroy(id)
+      .then(() => dispatch("FETCH_BOARD", { id: state.board.id }));
+  },
 };
 
 export default actions;

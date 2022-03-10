@@ -52,4 +52,7 @@ export const card = {
   update(id, payload) {
     return request("put", `/cards/${id}`, payload);
   },
+  destroy(id) {
+    return request("delete", `/cards/${id}`);
+  },
 };
