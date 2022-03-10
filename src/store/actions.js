@@ -24,6 +24,12 @@ const actions = {
       .create(title, listId, pos)
       .then(() => dispatch("FETCH_BOARD", { id: state.board.id }));
   },
+  FETCH_CARD({ commit }, { id }) {
+    console.log(`action : ${id}`);
+    api.card.fetch(id).then((data) => {
+      commit("SET_CARD", data.item);
+    });
+  },
 };
 
 export default actions;
