@@ -41,9 +41,10 @@ export default {
     onSubmit() {
       if (this.invalidInput) return;
       const { inputTitle, listId } = this;
-      this.ADD_CARD({ title: inputTitle, listId }).finally(
-        () => (this.inputTitle = "")
-      );
+      this.ADD_CARD({ title: inputTitle, listId }).finally(() => {
+        this.inputTitle = "";
+        this.$emit("close");
+      });
     },
     setupClickOutside(el) {
       document.querySelector("body").addEventListener("click", (e) => {
