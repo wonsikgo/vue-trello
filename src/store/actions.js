@@ -25,10 +25,14 @@ const actions = {
       .then(() => dispatch("FETCH_BOARD", { id: state.board.id }));
   },
   FETCH_CARD({ commit }, { id }) {
-    console.log(`action : ${id}`);
     api.card.fetch(id).then((data) => {
       commit("SET_CARD", data.item);
     });
+  },
+  UPDATE_CARD({ state, dispatch }, { id, title, description, pos, listId }) {
+    return api.card
+      .update(id, { title, description, pos, listId })
+      .then(() => dispatch("FETCH_BOARD", { id: state.board.id }));
   },
 };
 
