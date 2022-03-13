@@ -47,6 +47,11 @@ const actions = {
       .destroy(id)
       .then(() => dispatch("FETCH_BOARD", { id: state.board.id }));
   },
+  ADD_LIST({ state, dispatch }, { title, boardId, pos }) {
+    return api.list
+      .create({ title, pos, boardId })
+      .then(() => dispatch("FETCH_BOARD", { id: state.board.id }));
+  },
 };
 
 export default actions;
