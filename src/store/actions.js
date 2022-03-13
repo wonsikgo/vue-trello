@@ -52,6 +52,11 @@ const actions = {
       .create({ title, pos, boardId })
       .then(() => dispatch("FETCH_BOARD", { id: state.board.id }));
   },
+  UPDATE_LIST({ state, dispatch }, { id, pos, title }) {
+    return api.list
+      .update(id, { pos, title })
+      .then(() => dispatch("FETCH_BOARD", { id: state.board.id }));
+  },
 };
 
 export default actions;
