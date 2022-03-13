@@ -57,6 +57,11 @@ const actions = {
       .update(id, { pos, title })
       .then(() => dispatch("FETCH_BOARD", { id: state.board.id }));
   },
+  DELETE_LIST({ state, dispatch }, { id }) {
+    return api.list
+      .destroy(id)
+      .then(() => dispatch("FETCH_BOARD", { id: state.board.id }));
+  },
 };
 
 export default actions;
